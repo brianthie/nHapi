@@ -19,7 +19,7 @@ namespace NHapi.Model.V23.Segment{
 ///<li>STF-7: Active/Inactive Flag (ID)</li>
 ///<li>STF-8: Department (CE)</li>
 ///<li>STF-9: Service (CE)</li>
-///<li>STF-10: Phone (TN)</li>
+///<li>STF-10: Phone (XTN)</li>
 ///<li>STF-11: Office/Home Address (AD)</li>
 ///<li>STF-12: Activation Date (CM_DIN)</li>
 ///<li>STF-13: Inactivation Date (CM_DIN)</li>
@@ -62,7 +62,7 @@ public class STF : AbstractSegment  {
        this.add(typeof(ID), false, 1, 1, new System.Object[]{message, 183}, "Active/Inactive Flag");
        this.add(typeof(CE), false, 0, 200, new System.Object[]{message}, "Department");
        this.add(typeof(CE), false, 0, 200, new System.Object[]{message}, "Service");
-       this.add(typeof(TN), false, 0, 40, new System.Object[]{message}, "Phone");
+       this.add(typeof(XTN), false, 0, 40, new System.Object[]{message}, "Phone");
        this.add(typeof(AD), false, 2, 106, new System.Object[]{message}, "Office/Home Address");
        this.add(typeof(CM_DIN), false, 0, 26, new System.Object[]{message}, "Activation Date");
        this.add(typeof(CM_DIN), false, 0, 26, new System.Object[]{message}, "Inactivation Date");
@@ -436,13 +436,13 @@ catch (HL7Exception he) {
 	/// throws HL7Exception if the repetition number is invalid.
 	/// <param name="rep">The repetition number (this is a repeating field)</param>
 	///</summary>
-	public TN GetPhone(int rep)
+	public XTN GetPhone(int rep)
 	{
-			TN ret = null;
+			XTN ret = null;
 			try
 			{
 			IType t = this.GetField(10, rep);
-				ret = (TN)t;
+				ret = (XTN)t;
 		} catch (System.Exception ex) {
 			HapiLogFactory.GetHapiLog(GetType()).Error("Unexpected problem obtaining field value.  This is a bug.", ex);
 				throw new System.Exception("An unexpected error ocurred", ex);
@@ -453,13 +453,13 @@ catch (HL7Exception he) {
   ///<summary>
   /// Returns all repetitions of Phone (STF-10).
    ///</summary>
-  public TN[] GetPhone() {
-     TN[] ret = null;
+  public XTN[] GetPhone() {
+     XTN[] ret = null;
     try {
         IType[] t = this.GetField(10);  
-        ret = new TN[t.Length];
+        ret = new XTN[t.Length];
         for (int i = 0; i < ret.Length; i++) {
-            ret[i] = (TN)t[i];
+            ret[i] = (XTN)t[i];
         }
     } catch (HL7Exception he) {
         HapiLogFactory.GetHapiLog(this.GetType()).Error("Unexpected problem obtaining field value.  This is a bug.", he);
