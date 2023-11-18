@@ -64,6 +64,27 @@
         }
 
         [Test]
+        public void ParseMFNM02()
+        {
+            var message =
+                "MSH|^~\\&|EPIC|AIDI|||20070921152053||MFN^M02|297|P|2.3||||||8859/1\r"
+              + "MFI|PRA||UPD|20221001|20230131103236|NE\r"
+              + "MFE|MUP|9999999||20230131103236|UNAME01\r"
+              + "STF|UNAME01||NAME01^GivenName01|CF||A||||^^PH^uname01@email.tmp|facility^^location^^9999^BEL||||||||Dr.||I\r"
+              + "PRA|UNAME01|1|3||99999999999^R1";
+
+            var parser = new LegacyPipeParser();
+
+            var m = parser.Parse(message);
+
+            var mfnM02 = m as MFN_M02;
+
+            var phone = mfnM02.GetMF_STAFF().STF.GetPhone();
+            Assert.IsNotNull(mfnM02);
+            Assert.AreEqual("uname01@email.tmp",((mfnM02.GetMF_STAFF().GetAll("STF")[0] as STF).GetPhone(0) as XTN).EmailAddress.Value.ToString());
+        }
+
+        [Test]
         public void ParseORFR04()
         {
             var message =
@@ -201,6 +222,9 @@
             Assert.IsNotNull(recoveredMessage);
             Assert.IsFalse(string.Empty.Equals(recoveredMessage));
         }
+
+
+
 
         [Test]
         public void ParseORFR04ToXmlNoNTE()
